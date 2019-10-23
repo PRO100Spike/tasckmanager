@@ -6,6 +6,7 @@ require_once 'core/view.php';
 require_once 'core/controller.php';
 
 require_once 'core/db.php';
+
 /*
 Здесь обычно подключаются дополнительные модули, реализующие различный функционал:
 	> аутентификацию

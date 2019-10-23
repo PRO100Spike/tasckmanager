@@ -8,7 +8,7 @@
                 :class="{ active: sortKey == key }">
                 {{ key | capitalize }}
                 <i class="fas " :class="sortOrders[key] > 0 ? 'fa-sort-down' : 'fa-sort-up'"></i>
-          </span>
+                </span>
             </th>
         </tr>
         </thead>
@@ -31,10 +31,12 @@
             </form>
         </li>
         <li class="d-inline p-1  nav-item mr-2 ml-2">
-            <a href="/add"><button type="button" class="btn btn-primary">Add</button></a>
+            <a href="/add">
+                <button type="button" class="btn btn-primary">Add</button>
+            </a>
         </li>
         <li class="d-inline p-2  nav-item">
-            <a class="nav-link" href="#">login</a>
+            <a class="nav-link" href="/login">login</a>
         </li>
     </ul>
 
@@ -45,7 +47,7 @@
         </div>
 
         <div class="row justify-content-md-center">
-            <div class="col-md-auto">
+            <div class="col-12">
                 <task-grid
                         :heroes="gridData"
                         :columns="gridColumns"
@@ -53,7 +55,15 @@
                 </task-grid>
             </div>
         </div>
+
+        <div class="row justify-content-md-center mb-3">
+            <div class="clearfix btn-group col-md-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary" :class="{active: page == 1}" v-if="page != 1" @click="page--;paginate ()"> <<</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" :class="{active: page == pageNumber}" v-for="pageNumber in pages" @click="page = pageNumber;paginate ()"> {{pageNumber}}</button>
+                <button type="button" @click="page++;paginate ()" :class="{active: page == pages}" v-if="page < pages" class="btn btn-sm btn-outline-secondary"> >></button>
+            </div>
+        </div>
     </div>
 </div>
 
-<script src="/application/js/table.js"></script>
+<script src="/app/js/table.js"></script>

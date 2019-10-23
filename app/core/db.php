@@ -4,7 +4,6 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
 require_once "vendor/autoload.php";
-require_once "application/models/Task.php";
 
 class Db {
 
@@ -26,16 +25,6 @@ class Db {
 
         // obtaining the entity manager
         $this->entityManager = EntityManager::create($conn, $config);
-    }
-
-    /**
-     * @return array|object[]
-     */
-    public function getTask () {
-        $taskRepository = $this->entityManager->getRepository('Task');
-        $tasks = $taskRepository->findBy([], [], 3);
-
-        return $tasks;
     }
 
 }

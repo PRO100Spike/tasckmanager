@@ -60,8 +60,8 @@ var demo = new Vue({
         gridColumns: ['id', 'name', 'email', 'text', 'status'],
         gridData: [],
         page: 1,
-        perPage: 9,
-        pages: []
+        perPage: 3,
+        pages: 1
     },
     mounted() {
         axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -69,7 +69,19 @@ var demo = new Vue({
             .get('/')
             .then(response => (
                 console.log('Response:', response),
-                this.gridData =  response.data
+                this.gridData =  response.data.task,
+                this.pages = Math.ceil(response.data.task_count / this.perPage)
             ));
-    }
+    },
+    methods: {
+        paginate () {
+            console.log('Aaaa', this.page);
+            axios
+                .post('/', {page: this.page})
+                .then(response => (
+                    console.log('Response:', response),
+                        this.gridData =  response.data.task
+                ));
+        }
+    },
 })

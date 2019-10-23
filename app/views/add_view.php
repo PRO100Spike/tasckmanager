@@ -58,4 +58,4 @@
     </div>
 </div>
 
-<script src="/application/js/add.js"></script>
+<script src="/app/js/add.js"></script>
