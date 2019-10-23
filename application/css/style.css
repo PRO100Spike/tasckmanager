@@ -1,0 +1,7 @@
+.table-hover th {
+    white-space: nowrap;
+}
+
+.table-hover td:last-child {
+    white-space: nowrap;
+}
