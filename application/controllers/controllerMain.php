@@ -1,21 +1,17 @@
 <?php
 
-require_once 'app/models/Task.php';
-require_once 'app/models/User.php';
-
 class controllerMain extends Controller {
 
     const LIMIT_TASK = 3;
 
     function action_index() {
-        //$user = new User();
+        $task = $this->model('Task');
 
-        if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        if(self::isAjax()) {
             $db = new Db();
             $result = [];
 
             $taskRepository = $db->entityManager->getRepository('Task');
-
 
             $offset = 0;
             $data =  json_decode(file_get_contents('php://input'), true);
@@ -37,8 +33,31 @@ class controllerMain extends Controller {
 
             die(json_encode($result));
         }
-        //var_dump($user);
-        $this->view->generate('main_view.php', 'template_view.php');
+
+        $this->view->generate('main_view.php', 'template_view.php', ['isGuest' => Session::isGuest()]);
+    }
+
+    function action_add() {
+        if(self::isAjax()) {
+            $db = new Db();
+            $task = new Task();
+
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            $task->setName($data['name']);
+            $task->setEmail($data['email']);
+            $task->setText($data['text']);
+            $task->setStatus(false);
+
+            $db->entityManager->persist($task);
+            $db->entityManager->flush();
+
+            $result = 'done!';
+
+            die(json_encode($result));
+        }
+
+        $this->view->generate('add_view.php', 'template_view.php');
     }
 
 }

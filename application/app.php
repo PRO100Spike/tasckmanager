@@ -1,11 +1,10 @@
 <?php
 
 // подключаем файлы ядра
-require_once 'core/model.php';
-require_once 'core/view.php';
-require_once 'core/controller.php';
-
-require_once 'core/db.php';
+require_once 'core/Model.php';
+require_once 'core/View.php';
+require_once 'core/Session.php';
+require_once 'core/Controller.php';
 
 /*
 Здесь обычно подключаются дополнительные модули, реализующие различный функционал:
@@ -20,7 +19,9 @@ require_once 'core/db.php';
 	> Backup
 	> и др.
 */
+require_once "vendor/autoload.php";
+require_once 'core/Db.php';
 
-require_once 'core/route.php';
+require_once 'core/Route.php';
 
 Route::start();

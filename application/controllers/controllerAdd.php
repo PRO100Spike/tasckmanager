@@ -3,7 +3,7 @@
 class controllerAdd extends Controller {
 
     function action_index() {
-        if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        if(self::isAjax()) {
             $db = new Db();
             $task = new Task();
 
@@ -18,7 +18,7 @@ class controllerAdd extends Controller {
             $db->entityManager->flush();
 
             $result = 'done!';
-            var_dump($data);
+
             die(json_encode($result));
         }
 

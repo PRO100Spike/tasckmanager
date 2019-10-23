@@ -4,45 +4,38 @@ class Route {
 
     static function start() {
         // контроллер и действие по умолчанию
+
         $controller_name = 'Main';
         $action_name = 'index';
 
-        $routes = explode('/', $_SERVER['REQUEST_URI']);
+        $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+
+        $routes = explode('/', $uri_parts[0]);
 
         // получаем имя контроллера
         if (!empty($routes[1])) {
             $controller_name = ucfirst($routes[1]);
+        } else if ($_GET['controller']) {
+            $controller_name = $_GET['controller'];
         }
 
         // получаем имя экшена
         if (!empty($routes[2])) {
             $action_name = strtolower($routes[2]);
+        } else if ($_GET['action']) {
+            $action_name = strtolower($_GET['action']);
         }
 
         // добавляем префиксы
-        $model_name = 'model' . $controller_name;
         $controller_name = 'controller' . $controller_name;
         $action_name = 'action_' . $action_name;
 
-        /*
-        echo "Model: $model_name <br>";
-        echo "Controller: $controller_name <br>";
-        echo "Action: $action_name <br>";
-        */
-
-        // подцепляем файл с классом модели (файла модели может и не быть)
-
-        $model_file = $model_name . '.php';
-        $model_path = "app/models/" . $model_file;
-        if (file_exists($model_path)) {
-            include "app/models/" . $model_file;
-        }
 
         // подцепляем файл с классом контроллера
         $controller_file = $controller_name . '.php';
-        $controller_path = "app/controllers/" . $controller_file;
+        $controller_path = "application/controllers/" . $controller_file;
         if (file_exists($controller_path)) {
-            include "app/controllers/" . $controller_file;
+            include "application/controllers/" . $controller_file;
         } else {
             /*
             правильно было бы кинуть здесь исключение,

@@ -2,7 +2,7 @@ var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(
 
 var tasksRef = [];
 
-// create Vue app
+// create Vue application
 var app = new Vue({
     // element to mount to
     el: '#app',

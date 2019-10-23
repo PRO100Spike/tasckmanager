@@ -43,6 +43,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Add Task</button>
         </form>
+        <a href="/"><< back</a>
     </div>
     <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" :class="{show: isDone}" data-autohide="false">
         <div class="toast-header">
@@ -58,4 +59,4 @@
     </div>
 </div>
 
-<script src="/app/js/add.js"></script>
+<script src="/application/js/add.js"></script>

@@ -31,12 +31,16 @@
             </form>
         </li>
         <li class="d-inline p-1  nav-item mr-2 ml-2">
-            <a href="/add">
+            <a href="/?controller=add">
                 <button type="button" class="btn btn-primary">Add</button>
             </a>
         </li>
         <li class="d-inline p-2  nav-item">
-            <a class="nav-link" href="/login">login</a>
+            <? if($data['isGuest']) { ?>
+                <a class="nav-link" href="/?controller=auth">login</a>
+            <? } else {?>
+                <a class="nav-link" href="/?controller=auth&action=logout">logout</a>
+            <? } ?>
         </li>
     </ul>
 
@@ -66,4 +70,4 @@
     </div>
 </div>
 
-<script src="/app/js/table.js"></script>
+<script src="/application/js/table.js"></script>
